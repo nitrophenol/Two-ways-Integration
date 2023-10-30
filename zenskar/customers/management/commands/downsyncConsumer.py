@@ -1,0 +1,56 @@
+# myapp/management/commands/my_custom_command.py
+
+from django.core.management.base import BaseCommand
+import pika, json, requests
+from zenskar.settings import SECRET_KEY, BASE_URL,PIKA_PASSWORD,PIKA_USER,HOST,VIRTUAL_HOST
+class Command(BaseCommand):
+    help = 'Custom command to process messages from a queue'
+
+    def handle(self, *args, **kwargs):
+        def preprocess_message(body):
+            valid_json_str = body.decode('utf-8').replace("'", '"')
+            return valid_json_str
+
+        credentials = pika.PlainCredentials(PIKA_USER, PIKA_PASSWORD)
+        connection = pika.BlockingConnection(pika.ConnectionParameters(host=HOST, credentials=credentials, virtual_host=VIRTUAL_HOST))
+        channel = connection.channel()
+        channel.queue_declare(queue='customer_updates')
+
+        def callback(ch, method, properties, body):
+            try:
+                valid_json_str = preprocess_message(body)
+                data = json.loads(valid_json_str)
+                name = data.get('name')
+                email = data.get('email')
+                print(name)
+
+                # Update the URL and data to match your API endpoint
+                url = f"{BASE_URL}api/update-customer/"
+                payload = {
+                    'name': name,
+                    'email': email
+                }
+
+                headers = {'Content-Type': 'application/json'}
+
+                if data.get("method") == "create":
+                    url = f"{BASE_URL}api/create-customer/"
+                    response = requests.post(url, json=payload, headers=headers)
+                else:
+                    response = requests.put(url, json=payload, headers=headers)
+
+                if response.status_code == 200:
+                    print('Request was successful')
+                    print('Response data:', response.text)
+                else:
+                    print('Request failed with status code:', response.status_code)
+                    print('Response data:', response.text)
+
+            except json.JSONDecodeError as e:
+                print(f"Error decoding JSON: {e}")
+            except Exception as e:
+                print(f"Error creating customer: {e}")
+
+        channel.basic_consume(queue='customer_updates', on_message_callback=callback, auto_ack=True)
+        print(' [*] Waiting for messages. To exit, press CTRL+C')
+        channel.start_consuming()
