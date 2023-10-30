@@ -21,20 +21,6 @@ pip install -r requirements.txt
 
 Edit settings.py to include the correct Stripe API credentials:<br>
        STRIPE_SECRET = "sk_test_your_stripe_secret_key"<br>
-
-       
-```bash
-       bash run.sh
-       
-# The following commands will be executed in the background:<br>
-
-python manage.py runserver<br>
-python manage.py downsyncConsumer<br>
-python manage.py upsyncConsumer<br>
-python manage.py run<br>
-
-The project is now running locally, and the various management commands are listening for events and processing data. <br>
-
 # Configuration<br>
 STRIPE_PUBLIC: Your Stripe public key.<br>
 STRIPE_SECRET: Your Stripe secret key.<br>
@@ -44,6 +30,19 @@ VIRTUAL_HOST: Virtual host for your message broker.<br>
 PIKA_PASSWORD: Password for the message broker.<br>
 PIKA_USER: Username for the message broker.<br>
 Ensure that these settings are correctly configured for your specific environment.<br>
+       
+       ## bash run.sh
+       
+# The following command (bash run.sh) will be executed in the background:<br>
+
+python manage.py runserver<br>
+python manage.py downsyncConsumer<br>
+python manage.py upsyncConsumer<br>
+python manage.py run<br>
+
+The project is now running locally, and the various management commands are listening for events and processing data. <br>
+
+
 
 
 
