@@ -33,7 +33,7 @@ Ensure that these settings are correctly configured for your specific environmen
        
         bash run.sh
        
-# The following command (bash run.sh) will be executed in the background:<br>
+# The following command (bash run.sh) will execute these commands with nohup in the background:<br>
 
 python manage.py runserver<br>
 python manage.py downsyncConsumer<br>
