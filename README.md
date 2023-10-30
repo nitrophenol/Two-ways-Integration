@@ -31,7 +31,7 @@ PIKA_PASSWORD: Password for the message broker.<br>
 PIKA_USER: Username for the message broker.<br>
 Ensure that these settings are correctly configured for your specific environment.<br>
        
-       ## bash run.sh
+        bash run.sh
        
 # The following command (bash run.sh) will be executed in the background:<br>
 
