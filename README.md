@@ -42,3 +42,19 @@ VIRTUAL_HOST: Virtual host for your message broker.<br>
 PIKA_PASSWORD: Password for the message broker.<br>
 PIKA_USER: Username for the message broker.<br>
 Ensure that these settings are correctly configured for your specific environment.<br>
+
+
+
+Deployment to a Virtual Machine
+To deploy the project to a virtual machine, follow these steps:
+
+Copy the project files to your virtual machine.
+
+Install project dependencies on the virtual machine.
+
+Edit settings.py on the virtual machine to include the correct Stripe API credentials, just like in the local setup.
+
+Run the provided base.sh script to start the project.
+
+
+Another deployment approach will be the deployment of 4 entirely independent containers in run.sh file running by nohup 
