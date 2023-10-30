@@ -62,5 +62,5 @@ Run the provided run.sh script to start the project.
 ## Another deployment approach will be the deployment of 4 entirely independent containers in run.sh file running by nohup 
 
 ## Tech Stack
-django <be>
+django <br>
 RabbitMQ
