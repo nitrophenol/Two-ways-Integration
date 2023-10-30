@@ -15,12 +15,12 @@ To run the project locally, follow these steps:
    cd Two-Ways-Integration
 
 
-Install project dependencies:<br>
+Install project dependencies: <br>
 pip install -r requirements.txt
 
 
-Edit settings.py to include the correct Stripe API credentials:<br>
-       STRIPE_SECRET = "sk_test_your_stripe_secret_key"<br>
+Edit settings.py to include the correct Stripe API credentials: <br>
+       STRIPE_SECRET = "sk_test_your_stripe_secret_key" <br>
 # Configuration<br>
 STRIPE_PUBLIC: Your Stripe public key.<br>
 STRIPE_SECRET: Your Stripe secret key.<br>
@@ -55,7 +55,12 @@ Install project dependencies on the virtual machine.
 
 Edit settings.py on the virtual machine to include the correct Stripe API credentials, just like in the local setup.
 
+
 Run the provided run.sh script to start the project.
 
 
-# Another deployment approach will be the deployment of 4 entirely independent containers in run.sh file running by nohup 
+## Another deployment approach will be the deployment of 4 entirely independent containers in run.sh file running by nohup 
+
+## Tech Stack
+django <be>
+RabbitMQ
