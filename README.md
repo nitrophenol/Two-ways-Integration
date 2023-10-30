@@ -21,7 +21,9 @@ pip install -r requirements.txt
 
 Edit settings.py to include the correct Stripe API credentials:<br>
        STRIPE_SECRET = "sk_test_your_stripe_secret_key"<br>
-     ```bash
+
+       
+```bash
        bash run.sh
        
 # The following commands will be executed in the background:<br>
