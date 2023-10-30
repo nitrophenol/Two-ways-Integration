@@ -19,12 +19,12 @@ Install project dependencies:<br>
 pip install -r requirements.txt
 
 
-#Edit settings.py to include the correct Stripe API credentials:<br>
+# Edit settings.py to include the correct Stripe API credentials:<br>
        STRIPE_SECRET = "sk_test_your_stripe_secret_key"<br>
     ```bash
        bash run.sh
        
-#The following commands will be executed in the background:<br>
+# The following commands will be executed in the background:<br>
 
 python manage.py runserver<br>
 python manage.py downsyncConsumer<br>
@@ -33,7 +33,7 @@ python manage.py run<br>
 
 The project is now running locally, and the various management commands are listening for events and processing data. <br>
 
-#Configuration<br>
+# Configuration<br>
 STRIPE_PUBLIC: Your Stripe public key.<br>
 STRIPE_SECRET: Your Stripe secret key.<br>
 BASE_URL: The base URL for your project.<br>
@@ -45,7 +45,7 @@ Ensure that these settings are correctly configured for your specific environmen
 
 
 
-#Deployment to a Virtual Machine
+# Deployment to a Virtual Machine
 To deploy the project to a virtual machine, follow these steps:
 
 Copy the project files to your virtual machine.
@@ -57,4 +57,4 @@ Edit settings.py on the virtual machine to include the correct Stripe API creden
 Run the provided base.sh script to start the project.
 
 
-#Another deployment approach will be the deployment of 4 entirely independent containers in run.sh file running by nohup 
+# Another deployment approach will be the deployment of 4 entirely independent containers in run.sh file running by nohup 
