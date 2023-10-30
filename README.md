@@ -15,30 +15,30 @@ To run the project locally, follow these steps:
    cd Two-Ways-Integration
 
 
-Install project dependencies:
-   pip install -r requirements.txt
+Install project dependencies:<br>
+pip install -r requirements.txt
 
 
-Edit settings.py to include the correct Stripe API credentials:
-       STRIPE_SECRET = "sk_test_your_stripe_secret_key"
+Edit settings.py to include the correct Stripe API credentials:<br>
+       STRIPE_SECRET = "sk_test_your_stripe_secret_key"<br>
     ```bash
        bash run.sh
        
-The following commands will be executed in the background:
+The following commands will be executed in the background:<br>
 
-python manage.py runserver
-python manage.py downsyncConsumer
-python manage.py upsyncConsumer
-python manage.py run
+python manage.py runserver<br>
+python manage.py downsyncConsumer<br>
+python manage.py upsyncConsumer<br>
+python manage.py run<br>
 
-The project is now running locally, and the various management commands are listening for events and processing data. 
+The project is now running locally, and the various management commands are listening for events and processing data. <br>
 
-Configuration
-STRIPE_PUBLIC: Your Stripe public key.
-STRIPE_SECRET: Your Stripe secret key.
-BASE_URL: The base URL for your project.
-HOST: Hostname for your message broker (e.g., RabbitMQ).
-VIRTUAL_HOST: Virtual host for your message broker.
-PIKA_PASSWORD: Password for the message broker.
-PIKA_USER: Username for the message broker.
-Ensure that these settings are correctly configured for your specific environment.
+Configuration<br>
+STRIPE_PUBLIC: Your Stripe public key.<br>
+STRIPE_SECRET: Your Stripe secret key.<br>
+BASE_URL: The base URL for your project.<br>
+HOST: Hostname for your message broker (e.g., RabbitMQ).<br>
+VIRTUAL_HOST: Virtual host for your message broker.<br>
+PIKA_PASSWORD: Password for the message broker.<br>
+PIKA_USER: Username for the message broker.<br>
+Ensure that these settings are correctly configured for your specific environment.<br>
