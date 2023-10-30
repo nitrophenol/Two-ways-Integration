@@ -63,4 +63,6 @@ Run the provided run.sh script to start the project.
 
 ## Tech Stack
 django <br>
-RabbitMQ
+RabbitMQ <br>
+SQLite
+
