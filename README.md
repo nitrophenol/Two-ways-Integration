@@ -54,7 +54,7 @@ Install project dependencies on the virtual machine.
 
 Edit settings.py on the virtual machine to include the correct Stripe API credentials, just like in the local setup.
 
-Run the provided base.sh script to start the project.
+Run the provided run.sh script to start the project.
 
 
 # Another deployment approach will be the deployment of 4 entirely independent containers in run.sh file running by nohup 
