@@ -68,9 +68,7 @@ Make sure to update the following configurations in your Django project:
 
 - Stripe API keys for interacting with Stripe's customer data.
 
-## Dependencies
-
-Ensure you have the following dependencies installed:
+## Tech Stack
 
 - Django
 
