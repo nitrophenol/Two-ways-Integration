@@ -1,68 +1,79 @@
+# Django Customer Sync App
 
+## Overview
 
-# Two-Ways Integration
+This Django app provides a set of REST APIs for performing CRUD operations on customer data in the database. It has a unique twist where email is treated as the primary key for customers due to differences in customer IDs between Stripe and the database. The app supports both upsync and downsync operations to synchronize customer data between the database and Stripe.
 
-Two-Ways Integration is a Django project designed to run locally and deploy to a virtual machine. It handles interactions with Stripe, downsync, upsync, and APIs. This `readme.md` provides instructions for running the project locally and deploying it to a virtual machine.
+## Components
 
-## Running Locally
+### 1. REST APIs
 
-To run the project locally, follow these steps:
+The app exposes the following REST API endpoints for managing customer data:
 
-1. Clone the repository:
+- `POST /api/customers/`: Create a new customer in the database and publish the operation to a RabbitMQ queue for upsync.
 
-   ```bash
-   git clone https://github.com/your_username/Two-Ways-Integration.git
-   cd Two-Ways-Integration
+- `PUT /api/customers/{email}/`: Update an existing customer in the database and publish the operation to the upsync queue.
 
+- `DELETE /api/customers/{email}/`: Delete a customer from the database and publish the operation to the upsync queue.
 
-Install project dependencies: <br>
-pip install -r requirements.txt
+### 2. Upsync
 
+#### Publisher
 
-Edit settings.py to include the correct Stripe API credentials: <br>
-       STRIPE_SECRET = "sk_test_your_stripe_secret_key" <br>
-# Configuration<br>
-STRIPE_PUBLIC: Your Stripe public key.<br>
-STRIPE_SECRET: Your Stripe secret key.<br>
-BASE_URL: The base URL for your project.<br>
-HOST: Hostname for your message broker (e.g., RabbitMQ).<br>
-VIRTUAL_HOST: Virtual host for your message broker.<br>
-PIKA_PASSWORD: Password for the message broker.<br>
-PIKA_USER: Username for the message broker.<br>
-Ensure that these settings are correctly configured for your specific environment.<br>
-       
-        bash run.sh
-       
-# The following command (bash run.sh) will execute these commands with nohup in the background:<br>
+When a customer uses one of the POST, PUT, or DELETE requests, the app publishes the operation to a RabbitMQ queue. This operation is handled by the upsyncConsumer.py script.
 
-python manage.py runserver<br>
-python manage.py downsyncConsumer<br>
-python manage.py upsyncConsumer<br>
-python manage.py run<br>
+### 3. Upsync Consumer
 
-The project is now running locally, and the various management commands are listening for events and processing data. <br>
+Located at `/zenskar/customers/management/commands/upsyncConsumer.py`, this script listens to the upsync queue. When it detects an operation, it synchronizes the data with Stripe.
 
+### 4. Downsync
 
+#### downsync.py
 
+This script fetches customer information from both Stripe and the database and checks for differences. If there are changes, it adds the necessary updates to a queue.
 
+#### Run Scheduler
 
-# Deployment to a Virtual Machine
-To deploy the project to a virtual machine, follow these steps:
+To run downsync.py at regular intervals (e.g., every 10 seconds), a `run.py` script in the same directory can be used as a scheduler.
 
-Copy the project files to your virtual machine.
+### 5. Downsync Consumer
 
-Install project dependencies on the virtual machine.
+The `downsyncConsumer.py` script listens to the downsync queue. When it detects changes in the queue, it triggers PUT or POST requests to update the customer data in the database.
 
-Edit settings.py on the virtual machine to include the correct Stripe API credentials, just like in the local setup.
+## How to Use
 
+1. Install the required dependencies and set up your Django environment.
 
-Run the provided run.sh script to start the project.
+2. Configure RabbitMQ to work with your Django project.
 
+3. Start the Django development server.
 
-## Another deployment approach will be the deployment of 4 entirely independent containers in run.sh file running by nohup 
+4. Use the provided REST APIs to create, update, or delete customer data in the database.
 
-## Tech Stack
-django <br>
-RabbitMQ <br>
-SQLite
+5. The upsyncConsumer.py script will handle upsync operations.
 
+6. Configure the downsync.py script to run at your desired intervals using the run.py scheduler.
+
+7. The downsyncConsumer.py script will handle downsync operations.
+
+## Configuration
+
+Make sure to update the following configurations in your Django project:
+
+- RabbitMQ settings for upsync and downsync queues.
+
+- Stripe API keys for interacting with Stripe's customer data.
+
+## Dependencies
+
+Ensure you have the following dependencies installed:
+
+- Django
+
+- RabbitMQ
+
+- Stripe Python library
+
+## Disclaimer
+
+This is a basic overview of the structure and functionality of the Django Customer Sync App. Please update this documentation as needed to match your specific project's configuration and use cases.
