@@ -17,8 +17,8 @@ The app exposes the following REST API endpoints for managing customer data:
 - `DELETE http://localhost:8000/api/delete-customer/`: Delete a customer from the database and publish the operation to the upsync queue.
 - `{
     "name":"badger980",
-     "email":"badgerrooockeeees1383@gmail.com"
-  }`
+     "email":"badgerrooockes1383@gmail.com"
+  }`   :  this will be the formate of json payload for all request you can remove name field in delete request
 
 ### 2. Upsync
 
