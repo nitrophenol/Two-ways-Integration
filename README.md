@@ -10,11 +10,15 @@ This Django app provides a set of REST APIs for performing CRUD operations on cu
 
 The app exposes the following REST API endpoints for managing customer data:
 
-- `POST /api/customers/`: Create a new customer in the database and publish the operation to a RabbitMQ queue for upsync.
+- `POST http://localhost:8000/api/create-customer/`: Create a new customer in the database and publish the operation to a RabbitMQ queue for upsync.
 
-- `PUT /api/customers/{email}/`: Update an existing customer in the database and publish the operation to the upsync queue.
+- `PUT http://localhost:8000/api/update-customer/`: Update an existing customer in the database and publish the operation to the upsync queue.
 
-- `DELETE /api/customers/{email}/`: Delete a customer from the database and publish the operation to the upsync queue.
+- `DELETE http://localhost:8000/api/delete-customer/`: Delete a customer from the database and publish the operation to the upsync queue.
+- `{
+    "name":"badger980",
+     "email":"badgerrooockeeees1383@gmail.com"
+  }`
 
 ### 2. Upsync
 
@@ -46,7 +50,7 @@ The `downsyncConsumer.py` script listens to the downsync queue. When it detects 
 
 2. Configure RabbitMQ to work with your Django project.
 
-3. Start the Django development server.
+3. Run run.sh in zenskar/ it will run all the consumers and Django server.
 
 4. Use the provided REST APIs to create, update, or delete customer data in the database.
 
@@ -73,7 +77,3 @@ Ensure you have the following dependencies installed:
 - RabbitMQ
 
 - Stripe Python library
-
-## Disclaimer
-
-This is a basic overview of the structure and functionality of the Django Customer Sync App. Please update this documentation as needed to match your specific project's configuration and use cases.
