@@ -1,4 +1,4 @@
-# Django Customer Sync App
+# Two-Way Integrations:
 
 ## Overview
 
