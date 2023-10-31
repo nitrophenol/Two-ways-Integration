@@ -75,3 +75,4 @@ Make sure to update the following configurations in your Django project:
 - RabbitMQ
 
 - Stripe Python library
+- SQLite
