@@ -36,15 +36,23 @@ class Command(BaseCommand):
                 if data.get("method") == "create":
                     url = f"{BASE_URL}api/create-customer/"
                     response = requests.post(url, json=payload, headers=headers)
-                else:
+                elif data.get("method") == "delete":
+                    url = f"{BASE_URL}api/delete-customer/"
+                    payload = {
+                    'email': email
+                       }
+                    response = requests.delete(url, json=payload, headers=headers)
+                elif data.get("method") == "update":
                     response = requests.put(url, json=payload, headers=headers)
-
+                print(response.status_code)
                 if response.status_code == 200:
-                    print('Request was successful')
-                    print('Response data:', response.text)
-                else:
-                    print('Request failed with status code:', response.status_code)
-                    print('Response data:', response.text)
+                    print(f"Successfully processed message: {body}")
+                if response.status_code == 400:
+                    print(f"Error processing message: {body}")
+                if response.status_code == 204:
+                    print(f"Successfully processed message: {body}")        
+                if response.status_code == 404:
+                    print(f"Error processing message: {body}")
 
             except json.JSONDecodeError as e:
                 print(f"Error decoding JSON: {e}")
