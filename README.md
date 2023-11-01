@@ -10,7 +10,7 @@ This Django app provides a set of REST APIs for performing CRUD operations on cu
 
 The app exposes the following REST API endpoints for managing customer data:
 
-- GET http://localhost:8000/api/getall-customer/ `: to get all the customer in database
+- `GET http://localhost:8000/api/getall-customer/ `: to get all the customer in database
 
 - `POST http://localhost:8000/api/create-customer/`: Create a new customer in the database and publish the operation to a RabbitMQ queue for upsync.
 
