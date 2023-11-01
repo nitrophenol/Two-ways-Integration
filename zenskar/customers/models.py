@@ -4,9 +4,9 @@ from django.db import models
 from django.db import models
 
 class Customer(models.Model):
-    id = models.AutoField()  # Your specific ID field
+    id = models.AutoField(primary_key=True)  # Your specific ID field
     name = models.CharField(max_length=100)
-    email = models.EmailField(unique=True,primary_key=True)
+    email = models.EmailField(unique=True)
 
     def __str__(self):
         return self.name
