@@ -25,8 +25,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-STRIPE_PUBLIC="pk_test_51O4PwQSJAGGL3rCTux1kwIgTHUdbSsQlId3gvcZfmoTMpBF3Zj1OijcxoVR9hLEZp3MOvkFKWgYxnJbrBwf6ghI5005fPZidPt"
-STRIPE_SECRET="sk_test_51O4PwQSJAGGL3rCTKGkt0mplRKtTnagGEq7XdRY1tmp6xlIjOUHSSpt7DpM48U6XAnR6i4PHHoUj9nxLs6bObqmC00M38LY8aT"
+STRIPE_PUBLIC=""
+STRIPE_SECRET=""
 BASE_URL="http://localhost:8000/"
 HOST="localhost"
 VIRTUAL_HOST="cherry_broker"
