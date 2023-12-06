@@ -1,5 +1,5 @@
 # myapp/management/commands/my_custom_command.py
-
+from ...models import Customer
 from django.core.management.base import BaseCommand
 import pika, json, requests
 from zenskar.settings import SECRET_KEY, BASE_URL,PIKA_PASSWORD,PIKA_USER,HOST,VIRTUAL_HOST
@@ -35,7 +35,9 @@ class Command(BaseCommand):
 
                 if data.get("method") == "create":
                     url = f"{BASE_URL}api/create-customer/"
-                    response = requests.post(url, json=payload, headers=headers)
+                    customer = Customer(name=name, email=email)
+                    customer.save()
+                    
                 elif data.get("method") == "delete":
                     url = f"{BASE_URL}api/delete-customer/"
                     payload = {
@@ -44,15 +46,15 @@ class Command(BaseCommand):
                     response = requests.delete(url, json=payload, headers=headers)
                 elif data.get("method") == "update":
                     response = requests.put(url, json=payload, headers=headers)
-                print(response.status_code)
-                if response.status_code == 200:
-                    print(f"Successfully processed message: {body}")
-                if response.status_code == 400:
-                    print(f"Error processing message: {body}")
-                if response.status_code == 204:
-                    print(f"Successfully processed message: {body}")        
-                if response.status_code == 404:
-                    print(f"Error processing message: {body}")
+                # print(response.status_code)
+                # if response.status_code == 200:
+                #     print(f"Successfully processed message: {body}")
+                # if response.status_code == 400:
+                #     print(f"Error processing message: {body}")
+                # if response.status_code == 204:
+                #     print(f"Successfully processed message: {body}")        
+                # if response.status_code == 404:
+                #     print(f"Error processing message: {body}")
 
             except json.JSONDecodeError as e:
                 print(f"Error decoding JSON: {e}")
